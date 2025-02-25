@@ -12,16 +12,25 @@ let creli;
 function agregarAmigo() {//Funcion para agregar amigos
 
     IngresandoAmigos = document.getElementById('amigo').value;
-    if (frends.length == CantidadAmigosSecretos){//Validando la cantidad de amigos ingresados
-        document.getElementById('amigo').value = '';
-        alert("Cantidad MAxima ingresada");//Mensaje de alerta de que ya no se pueden ingresar mas.
+
+    if(IngresandoAmigos == ""){//Valida que el campo de texto no este vacio
+        alert("Ingresar por lo menos un amigo");
     }
-    else//Si aun no se cumple la condicion continua agregado
-    {
-        frends.push(IngresandoAmigos);
-        //console.log(frends);
-        document.getElementById('amigo').value = '';//Limpiar campo
+    else{
+        if (frends.length == CantidadAmigosSecretos){//Validando la cantidad de amigos ingresados
+            document.getElementById('amigo').value = '';
+            alert("Cantidad maxima ingresada");//Mensaje de alerta de que ya no se pueden ingresar mas.
+        }
+        else//Si aun no se cumple la condicion continua agregado
+        {
+            frends.push(IngresandoAmigos);
+            //console.log(frends);
+            document.getElementById('amigo').value = '';//Limpiar campo
+        }
+
+
     }
+    
         recorrerLista();
     }
 
@@ -32,32 +41,25 @@ function agregarAmigo() {//Funcion para agregar amigos
         for (let i = 0; i <= frends.length; i++) {//Recorre el array para ir agregando a la lista de HTML.
             creli = document.createElement("li");
             creli.textContent = frends[i];
-            lista.appendChild(creli);//Agrega el nombre al "li"
-
-            
+            lista.appendChild(creli);//Agrega el nombre al "li" 
             
         }
         
     }
 
     function sortearAmigo() {
-        if (frends != ""){
+        if (frends != ""){// Verifica si el Array esta vacio
             //console.log("No esta vacio");
-            indiceAmigoSecreto = Math.floor(Math.random()*frends.length);
+            indiceAmigoSecreto = Math.floor(Math.random()*frends.length);//Seleccion un indice aleatoriamente.
             nombreAmigoSecreto = frends[indiceAmigoSecreto];
-            console.log("Tu amigo secreto es: "+nombreAmigoSecreto);
+            //console.log("Tu amigo secreto es: "+nombreAmigoSecreto);
             
-            lista.innerHTML = "";
+            lista.innerHTML = "";//Limpia el li.
             lista = document.getElementById("listaAmigos");
             creli = document.createElement("li");
             creli.textContent = nombreAmigoSecreto;
             lista.appendChild(creli);
             
-
-
-
-
-
         }
         else{
             alert("Debe de ingresar por lo menos un amigo");
